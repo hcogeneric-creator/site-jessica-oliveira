@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agendar consulta · Jessica Oliveira, Nutricionista</title>
+<meta name="description" content="Agende sua consulta de nutrição online ou presencial em Maringá - PR.">
+<meta name="robots" content="noindex"><!-- REMOVER no lançamento -->
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+  .stepper { display:flex; gap:0; align-items:center; margin-bottom: var(--s-6); }
+  .step-node { display:flex; align-items:center; gap:10px; color:var(--ink-4); font-size:13px; font-family:var(--ff-mono); letter-spacing:0.06em; }
+  .step-node .num { width:28px;height:28px;border-radius:50%;border:1px solid var(--line-2);display:grid;place-items:center;font-size:12px;background:var(--bg-3); flex:none; }
+  .step-node.active { color:var(--ink); }
+  .step-node.active .num { background:var(--ink); color:var(--bg); border-color:var(--ink); }
+  .step-node.done .num { background:var(--primary); color:#fff; border-color:var(--primary); }
+  .step-node.done { color:var(--primary); }
+  .step-line { flex:1; height:1px; background:var(--line-2); margin: 0 14px; min-width: 20px; }
+  @media (max-width: 560px) {
+    .step-node .lbl { display:none; }
+    .step-node.active .lbl { display:inline; }
+    .step-line { margin: 0 8px; }
+  }
+
+  .service-card { padding: var(--s-5); border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--bg-3); cursor: pointer; transition: all 0.2s var(--ease); display:flex;flex-direction:column; height:100%; position:relative; }
+  .service-card:hover { border-color: var(--line-2); transform: translateY(-2px); box-shadow: var(--shadow); }
+  .service-card.selected { border-color: var(--primary); box-shadow: 0 0 0 3px color-mix(in oklab, var(--primary) 18%, transparent), var(--shadow); background: color-mix(in oklab, var(--primary-soft) 30%, var(--bg-3)); }
+
+  .cal-grid { display:grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+  .cal-head { font-family: var(--ff-mono); font-size: 11px; letter-spacing:0.08em; color:var(--ink-3); text-align:center; padding: 6px 0; }
+  .cal-day { aspect-ratio: 1; display:grid; place-items:center; border-radius: 10px; font-size: 14px; font-family: var(--ff-mono); cursor: pointer; transition: all 0.15s var(--ease); background: transparent; color: var(--ink-2); border:1px solid transparent; }
+  .cal-day.empty { visibility: hidden; pointer-events: none; }
+  .cal-day.disabled { color: var(--ink-4); cursor: not-allowed; }
+  .cal-day.avail:hover { background: var(--bg-2); border-color: var(--line-2); }
+  .cal-day.selected { background: var(--ink); color: var(--bg); font-weight: 600; }
+  .cal-day.today { border-color: var(--primary); }
+
+  .time-slot { padding: 10px 12px; background: var(--bg-3); border: 1px solid var(--line); border-radius: var(--r); font-size: 14px; font-family: var(--ff-mono); cursor: pointer; transition: all 0.15s; }
+  .time-slot:hover { border-color: var(--line-2); }
+  .time-slot.selected { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+  .services-layout { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-5); }
+  @media (max-width: 880px) {
+    .services-layout { grid-template-columns: 1fr; }
+    .services-layout > * { grid-column: 1 / -1 !important; grid-row: auto !important; }
+  }
+
+  /* Depoimentos */
+  .testimonial-carousel { background: var(--bg-3); border: 1px solid var(--line); border-radius: var(--r-xl); padding: var(--s-5); display: flex; flex-direction: column; gap: var(--s-4); overflow: hidden; }
+  .tcarousel-head { display: flex; justify-content: space-between; align-items: flex-end; gap: var(--s-3); }
+  .tcarousel-controls { display:flex; gap: 8px; }
+  .tcbtn { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line); background: var(--bg-3); color: var(--ink-2); font-size: 16px; display:flex; align-items:center; justify-content:center; transition: all 200ms ease; }
+  .tcbtn:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .tcarousel-viewport { overflow: hidden; }
+  .tcarousel-track { display: flex; gap: var(--s-4); transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1); will-change: transform; }
+  .tslide { flex: 0 0 100%; min-width: 0; display: grid; grid-template-columns: auto 1fr; gap: var(--s-4); align-items: start; }
+  .tslide .avatar { width: 56px; height: 56px; font-size: 22px; }
+  .tslide-quote { font-family: var(--ff-display); font-size: 17px; line-height: 1.5; color: var(--ink); font-weight: 400; text-wrap: pretty; }
+  .tslide-quote::before { content: '“'; color: var(--primary); margin-right: 2px; }
+  .tslide-quote::after { content: '”'; color: var(--primary); margin-left: 2px; }
+  .tslide-meta { margin-top: 10px; display: flex; align-items: center; gap: 10px; font-size: 13px; flex-wrap: wrap; }
+  .tslide-name { font-weight: 600; color: var(--ink-2); }
+  .tslide-detail { color: var(--ink-4); font-family: var(--ff-mono); font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; }
+  .tslide-stars { color: var(--primary); letter-spacing: 1px; font-size: 12px; }
+  .tcarousel-dots { display: flex; gap: 6px; justify-content: center; padding-top: 4px; }
+  .tcdot { width: 6px; height: 6px; border-radius: 50%; background: var(--line); border: none; padding: 0; transition: all 250ms ease; }
+  .tcdot.active { background: var(--ink-3); width: 22px; border-radius: 3px; }
+
+  /* WhatsApp */
+  @property --wa-angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+  .wa-cta {
+    display: flex; align-items: center; gap: var(--s-3); padding: var(--s-4);
+    color: white; border-radius: var(--r-xl); position: relative; overflow: hidden;
+    box-shadow: 0 12px 30px -12px rgba(18,140,126,0.5);
+    transition: transform 250ms ease, box-shadow 250ms ease;
+    background:
+      linear-gradient(135deg, #128C7E 0%, #25D366 100%) padding-box,
+      conic-gradient(from var(--wa-angle), rgba(255,255,255,0) 0deg, rgba(255,255,255,0.95) 40deg, #25D366 90deg, rgba(255,255,255,0) 180deg, rgba(37,211,102,0.6) 260deg, rgba(255,255,255,0.95) 320deg, rgba(255,255,255,0) 360deg) border-box;
+    border: 2px solid transparent;
+    animation: wa-spin 4s linear infinite;
+  }
+  @keyframes wa-spin { to { --wa-angle: 360deg; } }
+  .wa-cta:hover { transform: translateY(-2px); box-shadow: 0 16px 40px -12px rgba(18,140,126,0.65); }
+  .wa-cta:hover .wa-arrow { transform: translateX(4px); }
+  .wa-icon { width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .wa-arrow { font-size: 22px; transition: transform 250ms ease; opacity: 0.9; }
+  @media (prefers-reduced-motion: reduce) { .wa-cta { animation: none; } }
+</style>
+</head>
+<body data-page="agendar">
+
+<div id="site-nav"></div>
+
+<section class="section" style="padding-top:var(--s-7);padding-bottom:var(--s-5)">
+  <div class="container" style="max-width:900px;text-align:center" data-reveal>
+    <div class="eyebrow mb-3" data-i18n="nav.booking">Agendar</div>
+    <h1 class="display display-lg" style="margin-bottom:var(--s-3)" data-i18n="bk.title">Agendar consulta</h1>
+    <p style="font-size:18px;color:var(--ink-3);max-width:44ch;margin:0 auto" data-i18n="bk.sub">Três passos. Sem call center, sem questionário de 30 páginas.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top: var(--s-4)">
+  <div class="container" style="max-width:1080px">
+
+    <div class="stepper" id="stepper">
+      <div class="step-node active" data-step="1"><span class="num">1</span><span class="lbl" data-i18n="bk.step.1">Serviço</span></div>
+      <div class="step-line"></div>
+      <div class="step-node" data-step="2"><span class="num">2</span><span class="lbl" data-i18n="bk.step.2">Dia & horário</span></div>
+      <div class="step-line"></div>
+      <div class="step-node" data-step="3"><span class="num">3</span><span class="lbl" data-i18n="bk.step.3">Seus dados</span></div>
+    </div>
+
+    <!-- PASSO 1: SERVIÇO (preços em assets/site.js) -->
+    <div id="step-1" class="step-panel">
+      <div class="services-layout" data-reveal-stagger>
+        <div class="service-card tilt" data-service="inicial" data-reveal>
+          <div class="flex-between mb-4">
+            <div class="chip chip-primary" data-i18n="bk.s.1.dur">90 min</div>
+            <div class="num-mono" style="font-size:12px;color:var(--ink-3)">01</div>
+          </div>
+          <h3 style="font-family:var(--ff-display);font-size:26px;font-weight:500;margin-bottom:8px" data-i18n="bk.s.1.t">Consulta inicial</h3>
+          <p style="color:var(--ink-3);font-size:14px;margin-bottom:var(--s-5);flex:1" data-i18n="bk.s.1.d">Anamnese completa + plano entregue em 7 dias.</p>
+          <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:var(--s-4)">
+            <span class="num-mono" style="font-size:13px;color:var(--ink-3)">R$</span>
+            <span class="display" style="font-size:36px;color:var(--ink)" data-price-of="inicial">—</span>
+          </div>
+          <div class="label-mono" style="margin-bottom:var(--s-4)" data-i18n="bk.installments.3x">em até 3x sem juros no cartão</div>
+          <button class="btn btn-ghost btn-sm" style="width:100%;justify-content:center"><span data-i18n="bk.select">Selecionar</span></button>
+        </div>
+
+        <div class="service-card tilt" data-service="retorno" data-reveal>
+          <div class="flex-between mb-4">
+            <div class="chip" data-i18n="bk.s.2.dur">50 min</div>
+            <div class="num-mono" style="font-size:12px;color:var(--ink-3)">02</div>
+          </div>
+          <h3 style="font-family:var(--ff-display);font-size:26px;font-weight:500;margin-bottom:8px" data-i18n="bk.s.2.t">Retorno</h3>
+          <p style="color:var(--ink-3);font-size:14px;margin-bottom:var(--s-5);flex:1" data-i18n="bk.s.2.d">Ajuste de plano, reavaliação e troca de estratégia.</p>
+          <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:var(--s-4)">
+            <span class="num-mono" style="font-size:13px;color:var(--ink-3)">R$</span>
+            <span class="display" style="font-size:36px;color:var(--ink)" data-price-of="retorno">—</span>
+          </div>
+          <div class="label-mono" style="margin-bottom:var(--s-4)" data-i18n="bk.installments.3x">em até 3x sem juros no cartão</div>
+          <button class="btn btn-ghost btn-sm" style="width:100%;justify-content:center"><span data-i18n="bk.select">Selecionar</span></button>
+        </div>
+
+        <div class="service-card tilt" data-service="plano" data-reveal style="border-color:var(--primary);background:linear-gradient(180deg,color-mix(in oklab, var(--primary-soft) 40%, var(--bg-3)),var(--bg-3))">
+          <div style="position:absolute;top:-10px;right:20px" class="chip chip-accent">Popular</div>
+          <div class="flex-between mb-4">
+            <div class="chip chip-primary" data-i18n="bk.s.3.dur">6 meses</div>
+            <div class="num-mono" style="font-size:12px;color:var(--ink-3)">03</div>
+          </div>
+          <h3 style="font-family:var(--ff-display);font-size:26px;font-weight:500;margin-bottom:8px" data-i18n="bk.s.3.t">Plano semestral</h3>
+          <p style="color:var(--ink-3);font-size:14px;margin-bottom:var(--s-5);flex:1" data-i18n="bk.s.3.d">Consulta inicial + 5 retornos + suporte no WhatsApp. Parcela em até 10x.</p>
+          <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:4px">
+            <span class="num-mono" style="font-size:13px;color:var(--ink-3)">R$</span>
+            <span class="display" style="font-size:36px;color:var(--ink)" data-price-of="plano">—</span>
+          </div>
+          <div class="label-mono" style="margin-bottom:var(--s-4)" data-i18n="bk.installments">em até 10x no cartão</div>
+          <button class="btn btn-primary btn-sm" style="width:100%;justify-content:center"><span data-i18n="bk.select">Selecionar</span></button>
+        </div>
+
+        <!-- Depoimentos (A CONFIRMAR: trocar por depoimentos reais e autorizados) -->
+        <div class="testimonial-carousel" id="tcarousel" style="grid-column: 1 / 3; grid-row: 2;">
+          <div class="tcarousel-head">
+            <div>
+              <div class="eyebrow" style="margin-bottom:6px" data-i18n="bk.tm.eyebrow">Quem já passou por aqui</div>
+              <div style="font-family:var(--ff-display);font-size:22px;font-weight:500;line-height:1.2" data-i18n="bk.tm.title">Histórias de pacientes</div>
+            </div>
+            <div class="tcarousel-controls">
+              <button class="tcbtn" id="tc-prev" aria-label="Anterior">←</button>
+              <button class="tcbtn" id="tc-next" aria-label="Próximo">→</button>
+            </div>
+          </div>
+          <div class="tcarousel-viewport"><div class="tcarousel-track" id="tc-track"></div></div>
+          <div class="tcarousel-dots" id="tc-dots"></div>
+        </div>
+
+        <a data-wa="Olá Jessica, gostaria de tirar uma dúvida sobre os planos." class="wa-cta" style="grid-column: 3; grid-row: 2;">
+          <div class="wa-icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32" width="22" height="22" fill="currentColor"><path d="M16 3.2C8.9 3.2 3.2 8.9 3.2 16c0 2.3.6 4.5 1.7 6.4L3.2 28.8l6.6-1.7c1.9 1 4 1.6 6.2 1.6 7.1 0 12.8-5.7 12.8-12.8S23.1 3.2 16 3.2zm0 23.4c-2 0-3.9-.5-5.6-1.5l-.4-.2-3.9 1 1-3.8-.3-.4A10.6 10.6 0 1 1 16 26.6zm5.8-8c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2s-.8 1-1 1.2c-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-.9-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.5.1-.2.1-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.1 3.1 1.3 3.3c.2.2 2.2 3.4 5.4 4.8.8.3 1.4.5 1.8.7.8.2 1.5.2 2 .1.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4z"/></svg>
+          </div>
+          <div style="flex:1">
+            <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;font-family:var(--ff-mono);opacity:0.85" data-i18n="bk.wa.eyebrow">Tem dúvidas?</div>
+            <div style="font-family:var(--ff-display);font-size:18px;font-weight:500;line-height:1.2;margin-top:2px" data-i18n="bk.wa.title">Fale comigo no WhatsApp</div>
+            <div style="font-size:13px;opacity:0.85;margin-top:4px" data-i18n="bk.wa.sub">Resposta em até 2 h, no horário comercial.</div>
+          </div>
+          <div class="wa-arrow" aria-hidden="true">→</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- PASSO 2: DIA E HORÁRIO (dias/horários em assets/site.js) -->
+    <div id="step-2" class="step-panel" style="display:none">
+      <div class="split" style="grid-template-columns:1.1fr 1fr;gap:var(--s-6);align-items:start">
+        <div class="card card-lg">
+          <div class="flex-between mb-5">
+            <button class="btn btn-ghost btn-sm" id="prev-month" aria-label="Mês anterior">←</button>
+            <div class="display" id="month-label" style="font-size:22px;font-weight:500"></div>
+            <button class="btn btn-ghost btn-sm" id="next-month" aria-label="Próximo mês">→</button>
+          </div>
+          <div class="cal-grid" id="cal-head"></div>
+          <div class="cal-grid" id="cal-days" style="margin-top:4px"></div>
+        </div>
+
+        <div class="card card-lg">
+          <div class="eyebrow mb-4" id="time-date-label" data-i18n="bk.pick.day">Escolha um dia →</div>
+          <div id="time-panel">
+            <div style="text-align:center;padding:var(--s-7) 0;color:var(--ink-4)">
+              <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" style="margin:0 auto var(--s-3)"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              <p style="font-size:14px" data-i18n="bk.pick.hint">Selecione uma data no calendário</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex-between mt-6">
+        <button class="btn btn-ghost" onclick="goStep(1)">← <span data-i18n="bk.back">Voltar</span></button>
+        <button class="btn btn-primary" id="to-step-3" disabled style="opacity:0.4;pointer-events:none"><span data-i18n="bk.next">Continuar</span> <span class="arrow">→</span></button>
+      </div>
+    </div>
+
+    <!-- PASSO 3: DADOS -->
+    <div id="step-3" class="step-panel" style="display:none">
+      <div class="split" style="grid-template-columns:1.3fr 1fr;gap:var(--s-6);align-items:start">
+        <div class="card card-lg">
+          <div class="eyebrow mb-4" data-i18n="bk.step.3">Seus dados</div>
+          <div class="grid grid-2" style="gap:var(--s-4)">
+            <div class="field" style="grid-column:1/-1">
+              <label for="f-name" data-i18n="bk.name">Nome completo</label>
+              <input type="text" id="f-name" autocomplete="name" placeholder="Seu nome">
+            </div>
+            <div class="field">
+              <label for="f-email" data-i18n="bk.email">E-mail</label>
+              <input type="email" id="f-email" autocomplete="email" placeholder="voce@email.com">
+            </div>
+            <div class="field">
+              <label for="f-phone" data-i18n="bk.phone">WhatsApp</label>
+              <input type="tel" id="f-phone" autocomplete="tel" placeholder="(44) 99999-9999">
+            </div>
+            <div class="field" style="grid-column:1/-1">
+              <label for="f-notes" data-i18n="bk.notes">Observações (opcional)</label>
+              <textarea id="f-notes" rows="4" placeholder="Algo que eu deva saber antes da consulta?"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass" style="padding:var(--s-5)">
+          <div class="eyebrow mb-4" data-i18n="bk.summary">Resumo</div>
+          <div id="summary-body" style="display:flex;flex-direction:column;gap:var(--s-3)"></div>
+          <hr class="divider">
+          <button class="btn btn-primary btn-lg" id="confirm-btn" style="width:100%;justify-content:center"><span data-i18n="bk.confirm">Enviar pedido pelo WhatsApp</span></button>
+          <p class="label-mono" style="margin-top:var(--s-3);text-align:center;line-height:1.5" data-i18n="bk.confirm.note">O horário fica confirmado quando a Jessica responder no WhatsApp.</p>
+        </div>
+      </div>
+
+      <div class="flex-between mt-6">
+        <button class="btn btn-ghost" onclick="goStep(2)">← <span data-i18n="bk.back">Voltar</span></button>
+      </div>
+    </div>
+
+    <!-- ENVIADO -->
+    <div id="step-success" class="step-panel" style="display:none">
+      <div class="glass pad-box" style="text-align:center;max-width:620px;margin:0 auto">
+        <div style="width:72px;height:72px;border-radius:50%;background:var(--primary);color:#fff;display:grid;place-items:center;margin:0 auto var(--s-5);font-size:32px">✓</div>
+        <h2 class="display display-md" style="margin-bottom:var(--s-3)" data-i18n="bk.success.t">Pedido enviado!</h2>
+        <p style="color:var(--ink-3);font-size:16px;max-width:40ch;margin:0 auto var(--s-5)" data-i18n="bk.success.d">Abrimos o WhatsApp com os seus dados.</p>
+        <div id="success-summary" class="card" style="text-align:left;margin-bottom:var(--s-5)"></div>
+        <div class="flex-center gap-3" style="flex-wrap:wrap">
+          <a id="wa-again" class="btn btn-primary" target="_blank" rel="noopener"><span data-i18n="bk.success.again">Abrir WhatsApp de novo</span></a>
+          <a href="index.html" class="btn btn-ghost">← <span data-i18n="nav.home">Início</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="assets/site.js"></script>
+<script src="assets/i18n.js"></script>
+<script src="assets/app.js"></script>
+
+<script>
+// ============== AGENDAMENTO ==============
+const S = window.SITE;
+const L = () => window.I18N?.lang || 'pt';
+const T = (k) => window.I18N?.t(k) || k;
+const state = { service: null, date: null, time: null };
+const serviceKeys = { inicial: 'bk.s.1.t', retorno: 'bk.s.2.t', plano: 'bk.s.3.t' };
+const brl = (v) => 'R$ ' + v.toLocaleString('pt-BR');
+
+function goStep(n) {
+  ['1', '2', '3', 'success'].forEach(s => {
+    const el = document.getElementById('step-' + s);
+    if (el) el.style.display = 'none';
+  });
+  document.getElementById('step-' + n).style.display = 'block';
+  document.querySelectorAll('.step-node').forEach(node => {
+    const s = parseInt(node.dataset.step);
+    node.classList.remove('active', 'done');
+    if (n === 'success') { node.classList.add('done'); return; }
+    if (s < n) node.classList.add('done');
+    if (s === n) node.classList.add('active');
+  });
+  window.scrollTo({ top: document.querySelector('.stepper').offsetTop - 90, behavior: 'smooth' });
+}
+
+document.querySelectorAll('.service-card').forEach(card => {
+  card.addEventListener('click', () => {
+    document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    state.service = card.dataset.service;
+    setTimeout(() => goStep(2), 280);
+  });
+});
+
+// ============== CALENDÁRIO ==============
+const today = new Date(); today.setHours(0, 0, 0, 0);
+const viewDate = new Date(today.getFullYear(), today.getMonth(), 1);
+const maxDate = new Date(today); maxDate.setDate(maxDate.getDate() + 60);
+
+function isAvailable(date) {
+  return date > today && date <= maxDate && S.diasAtendimento.includes(date.getDay());
+}
+
+function renderCalendar() {
+  const y = viewDate.getFullYear(), m = viewDate.getMonth();
+  const loc = L() === 'pt' ? 'pt-BR' : 'en-US';
+  const label = new Date(y, m, 1).toLocaleDateString(loc, { month: 'long', year: 'numeric' }).replace(' de ', ' ');
+  document.getElementById('month-label').textContent = label.charAt(0).toUpperCase() + label.slice(1);
+  const heads = L() === 'pt' ? ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'] : ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+  document.getElementById('cal-head').innerHTML = heads.map(h => `<div class="cal-head">${h}</div>`).join('');
+
+  const first = new Date(y, m, 1).getDay();
+  const days = new Date(y, m + 1, 0).getDate();
+  const grid = document.getElementById('cal-days');
+  grid.innerHTML = '';
+  for (let i = 0; i < first; i++) {
+    const d = document.createElement('div'); d.className = 'cal-day empty'; grid.appendChild(d);
+  }
+  for (let d = 1; d <= days; d++) {
+    const dd = new Date(y, m, d);
+    const btn = document.createElement('div');
+    btn.className = 'cal-day';
+    btn.textContent = d;
+    if (dd.getTime() === today.getTime()) btn.classList.add('today');
+    if (isAvailable(dd)) {
+      btn.classList.add('avail');
+      btn.addEventListener('click', () => selectDate(dd, btn));
+    } else {
+      btn.classList.add('disabled');
+    }
+    if (state.date && dd.getTime() === state.date.getTime()) btn.classList.add('selected');
+    grid.appendChild(btn);
+  }
+  document.getElementById('prev-month').style.visibility =
+    (y === today.getFullYear() && m === today.getMonth()) ? 'hidden' : 'visible';
+  document.getElementById('next-month').style.visibility =
+    (new Date(y, m + 1, 1) > maxDate) ? 'hidden' : 'visible';
+}
+
+function selectDate(date, btn) {
+  document.querySelectorAll('.cal-day.selected').forEach(el => el.classList.remove('selected'));
+  btn.classList.add('selected');
+  state.date = date;
+  state.time = null;
+  setContinue(false);
+  renderTimes();
+}
+
+function setContinue(on) {
+  const cont = document.getElementById('to-step-3');
+  cont.disabled = !on;
+  cont.style.opacity = on ? '1' : '0.4';
+  cont.style.pointerEvents = on ? 'auto' : 'none';
+}
+
+function fmtDate(d, withYear) {
+  return d.toLocaleDateString(L() === 'pt' ? 'pt-BR' : 'en-US',
+    Object.assign({ weekday: 'long', day: 'numeric', month: 'long' }, withYear ? { year: 'numeric' } : {}));
+}
+
+function renderTimes() {
+  if (!state.date) return;
+  const panel = document.getElementById('time-panel');
+  const dateLbl = document.getElementById('time-date-label');
+  dateLbl.removeAttribute('data-i18n');
+  dateLbl.textContent = fmtDate(state.date);
+  const mk = (list) => list.map(t =>
+    `<button class="time-slot${state.time === t ? ' selected' : ''}" data-time="${t}">${t}</button>`).join('');
+  panel.innerHTML = `
+    <div class="label-mono mb-3">${T('bk.morning')}</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:var(--s-4)">${mk(S.horarios.manha)}</div>
+    <div class="label-mono mb-3">${T('bk.afternoon')}</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">${mk(S.horarios.tarde)}</div>`;
+  panel.querySelectorAll('.time-slot').forEach(btn => {
+    btn.addEventListener('click', () => {
+      panel.querySelectorAll('.time-slot').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      state.time = btn.dataset.time;
+      setContinue(true);
+    });
+  });
+}
+
+document.getElementById('prev-month').addEventListener('click', () => { viewDate.setMonth(viewDate.getMonth() - 1); renderCalendar(); });
+document.getElementById('next-month').addEventListener('click', () => { viewDate.setMonth(viewDate.getMonth() + 1); renderCalendar(); });
+document.getElementById('to-step-3').addEventListener('click', () => { renderSummary(); goStep(3); });
+
+function summaryRows() {
+  const svc = S.servicos[state.service];
+  return [
+    ['Serviço', T(serviceKeys[state.service])],
+    ['Data', fmtDate(state.date, true)],
+    ['Horário', state.time],
+    ['Duração', svc.duracao],
+    ['Valor', brl(svc.preco)]
+  ];
+}
+
+function renderSummary() {
+  const rows = summaryRows();
+  document.getElementById('summary-body').innerHTML = rows.map(([k, v], i) =>
+    (i === rows.length - 1 ? '<hr class="divider" style="margin: var(--s-2) 0">' : '') +
+    `<div class="flex-between" style="gap:12px"><span class="label-mono">${k}</span><span style="font-weight:600;color:var(--ink);text-align:right;${k === 'Data' ? 'text-transform:capitalize' : ''}">${v}</span></div>`
+  ).join('');
+}
+
+document.getElementById('confirm-btn').addEventListener('click', () => {
+  const f = (id) => document.getElementById(id);
+  const name = f('f-name').value.trim();
+  const email = f('f-email').value.trim();
+  const phone = f('f-phone').value.trim();
+  const notes = f('f-notes').value.trim();
+  f('f-name').parentElement.classList.toggle('invalid', !name);
+  f('f-phone').parentElement.classList.toggle('invalid', !phone);
+  if (!name || !phone) { alert(L() === 'pt' ? 'Preencha nome e WhatsApp.' : 'Please fill in name and WhatsApp.'); return; }
+
+  const lines = ['Olá Jessica! Vim pelo site e gostaria de agendar:', ''];
+  summaryRows().forEach(([k, v]) => lines.push(`• ${k}: ${v}`));
+  lines.push('', `• Nome: ${name}`, `• WhatsApp: ${phone}`);
+  if (email) lines.push(`• E-mail: ${email}`);
+  if (notes) lines.push(`• Observações: ${notes}`);
+  const url = S.waLink(lines.join('\n'));
+
+  document.getElementById('wa-again').href = url;
+  document.getElementById('success-summary').innerHTML = document.getElementById('summary-body').innerHTML;
+  window.open(url, '_blank', 'noopener');
+  goStep('success');
+});
+
+document.addEventListener('langchange', () => { renderCalendar(); renderTimes(); if (state.time) renderSummary(); });
+renderCalendar();
+
+// ============== DEPOIMENTOS (A CONFIRMAR: trocar por depoimentos reais) ==============
+const testimonials = [
+  { name: 'Mariana S.', detail: '6 meses · Plano semestral', quote: 'Saí da consulta com um plano que cabe na minha rotina, não com uma lista de proibições. Em 4 meses parei de estourar o jantar.' },
+  { name: 'Rafael C.',  detail: 'Consulta inicial', quote: 'Esperava um cardápio rígido. Recebi educação alimentar e ferramentas pra decidir. Mudou minha relação com comida.' },
+  { name: 'Camila P.',  detail: 'Plano semestral', quote: 'Já tinha tentado três nutricionistas. A Jessica foi a primeira que ouviu antes de prescrever. Faz toda diferença.' },
+  { name: 'João M.',    detail: 'Retorno · 4º mês', quote: 'Atendimento online funcionou super bem pra minha rotina. WhatsApp pra dúvidas pontuais foi um divisor de águas.' },
+  { name: 'Beatriz L.', detail: 'Plano semestral · finalizado', quote: 'Resultados que ficaram. 8 meses depois ainda sigo o que aprendi. Não foi dieta, foi um jeito novo de comer.' }
+];
+
+(function initCarousel() {
+  const track = document.getElementById('tc-track');
+  const dotsBox = document.getElementById('tc-dots');
+  if (!track || !dotsBox) return;
+
+  testimonials.forEach((t, i) => {
+    const slide = document.createElement('div');
+    slide.className = 'tslide';
+    slide.innerHTML = `
+      <div class="avatar">${t.name.charAt(0)}</div>
+      <div>
+        <div class="tslide-quote">${t.quote}</div>
+        <div class="tslide-meta">
+          <span class="tslide-stars">★★★★★</span>
+          <span class="tslide-name">${t.name}</span>
+          <span class="tslide-detail">${t.detail}</span>
+        </div>
+      </div>`;
+    track.appendChild(slide);
+    const dot = document.createElement('button');
+    dot.className = 'tcdot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Depoimento ' + (i + 1));
+    dot.addEventListener('click', () => go(i));
+    dotsBox.appendChild(dot);
+  });
+
+  let idx = 0, timer = null;
+  function go(n) {
+    idx = (n + testimonials.length) % testimonials.length;
+    track.style.transform = `translateX(calc(-${idx * 100}% - ${idx} * var(--s-4)))`;
+    [...dotsBox.children].forEach((d, i) => d.classList.toggle('active', i === idx));
+    restart();
+  }
+  function restart() { clearInterval(timer); timer = setInterval(() => go(idx + 1), 5500); }
+
+  document.getElementById('tc-prev').addEventListener('click', () => go(idx - 1));
+  document.getElementById('tc-next').addEventListener('click', () => go(idx + 1));
+  const carousel = document.getElementById('tcarousel');
+  carousel.addEventListener('mouseenter', () => clearInterval(timer));
+  carousel.addEventListener('mouseleave', restart);
+  restart();
+})();
+</script>
+</body>
+</html>

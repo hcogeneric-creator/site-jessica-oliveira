@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recomendações · Jessica Oliveira, Nutricionista</title>
+<meta name="description" content="Suplementos, livros e utensílios que recomendo em consulta.">
+<meta name="robots" content="noindex"><!-- REMOVER no lançamento -->
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+  .product-card { display:flex; flex-direction:column; height:100%; background:var(--bg-3); border:1px solid var(--line); border-radius:var(--r-lg); overflow:hidden; transition: all 0.25s var(--ease); }
+  .product-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--line-2); }
+  .product-thumb { aspect-ratio: 1; position: relative; overflow: hidden; display:grid;place-items:center; }
+  .product-thumb img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:#fff; padding:12px; }
+  .product-thumb .glyph { font-family: var(--ff-display); font-style: italic; font-size: 72px; color: rgba(255,255,255,0.85); font-weight: 500; }
+  .product-thumb .tag { position:absolute; top:12px; left:12px; z-index:1; background:rgba(255,255,255,0.95); }
+  .product-body { padding: var(--s-4); display:flex; flex-direction:column; gap: var(--s-2); flex:1; }
+  .why-box { background: var(--bg-2); border-radius: var(--r); padding: 10px 12px; font-size: 12.5px; color: var(--ink-2); margin-top: auto; }
+  .why-box .label-mono { display:block; margin-bottom: 4px; font-size: 10px; color: var(--ink-3); }
+</style>
+</head>
+<body data-page="produtos">
+
+<div id="site-nav"></div>
+
+<section class="section" style="padding-top:var(--s-7);padding-bottom:var(--s-5)">
+  <div class="container" style="max-width:820px" data-reveal>
+    <div class="eyebrow mb-3" data-i18n="nav.shop">Recomendações</div>
+    <h1 class="display display-lg" style="margin-bottom:var(--s-4)" data-i18n="sh.title">O que recomendo</h1>
+    <p style="font-size:17px;color:var(--ink-2);max-width:58ch" data-i18n="sh.sub">Suplementos, livros e utensílios que uso, recomendo em consulta e que têm evidência por trás.</p>
+
+    <div class="chip mt-5" style="padding:10px 14px;border-radius:var(--r);background:var(--bg-2);font-size:12px;white-space:normal" data-i18n="sh.disclaimer">
+      Aviso: sou associada ao programa de afiliados da Amazon.
+    </div>
+
+    <div class="flex gap-2 mt-5" style="flex-wrap:wrap">
+      <button class="chip chip-primary" data-pfilter="all" data-i18n="sh.filter.all">Tudo</button>
+      <button class="chip" data-pfilter="sup" data-i18n="sh.filter.sup">Suplementos</button>
+      <button class="chip" data-pfilter="book" data-i18n="sh.filter.book">Livros</button>
+      <button class="chip" data-pfilter="tool" data-i18n="sh.filter.tool">Utensílios</button>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUTOS
+     Para cada produto: troque href="#" pelo link de afiliado da Amazon (amzn.to/...).
+     Foto opcional: <img src="URL-da-foto" alt=""> dentro de .product-thumb (substitui a letra). -->
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="grid grid-4" id="products-grid" data-reveal-stagger>
+
+      <div class="product-card tilt" data-cat="sup" data-reveal>
+        <div class="product-thumb" style="background:linear-gradient(135deg,var(--primary),var(--primary-2))">
+          <div class="chip tag">Suplemento</div>
+          <div class="glyph">C</div>
+        </div>
+        <div class="product-body">
+          <div class="label-mono">Essential Nutrition</div>
+          <h3 style="font-size:15.5px;font-weight:600;line-height:1.3;color:var(--ink)">Creatina Creapure® 300g</h3>
+          <div class="why-box">
+            <span class="label-mono" data-i18n="sh.why">Por que recomendo</span>
+            Única com selo Creapure®, pureza &gt; 99,95%. A escolha de primeira linha para qualquer protocolo.
+          </div>
+          <a href="#" class="btn btn-accent btn-sm" style="justify-content:center" target="_blank" rel="noopener sponsored">
+            <span data-i18n="sh.buy">Comprar na Amazon</span><span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="product-card tilt" data-cat="sup" data-reveal>
+        <div class="product-thumb" style="background:linear-gradient(135deg,#c9a876,var(--accent))">
+          <div class="chip tag">Suplemento</div>
+          <div class="glyph">W</div>
+        </div>
+        <div class="product-body">
+          <div class="label-mono">Growth Supplements</div>
+          <h3 style="font-size:15.5px;font-weight:600;line-height:1.3;color:var(--ink)">Whey Protein Isolado 1kg</h3>
+          <div class="why-box">
+            <span class="label-mono" data-i18n="sh.why">Por que recomendo</span>
+            Custo-benefício imbatível para quem precisa fechar cota proteica sem estourar orçamento.
+          </div>
+          <a href="#" class="btn btn-accent btn-sm" style="justify-content:center" target="_blank" rel="noopener sponsored">
+            <span data-i18n="sh.buy">Comprar na Amazon</span><span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="product-card tilt" data-cat="sup" data-reveal>
+        <div class="product-thumb" style="background:linear-gradient(135deg,#5a8a5c,var(--primary))">
+          <div class="chip tag">Suplemento</div>
+          <div class="glyph">D</div>
+        </div>
+        <div class="product-body">
+          <div class="label-mono">Puritan's Pride</div>
+          <h3 style="font-size:15.5px;font-weight:600;line-height:1.3;color:var(--ink)">Vitamina D3 2000 UI</h3>
+          <div class="why-box">
+            <span class="label-mono" data-i18n="sh.why">Por que recomendo</span>
+            Dose prática de manutenção. Para reposição, precisa avaliar 25-OH-D em exame.
+          </div>
+          <a href="#" class="btn btn-accent btn-sm" style="justify-content:center" target="_blank" rel="noopener sponsored">
+            <span data-i18n="sh.buy">Comprar na Amazon</span><span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="product-card tilt" data-cat="sup" data-reveal>
+        <div class="product-thumb" style="background:linear-gradient(135deg,var(--ink),#3d4a42)">
+          <div class="chip tag">Suplemento</div>
+          <div class="glyph">Ω</div>
+        </div>
+        <div class="product-body">
+          <div class="label-mono">Vitafor</div>
+          <h3 style="font-size:15.5px;font-weight:600;line-height:1.3;color:var(--ink)">Ômega-3 EPA/DHA 1000mg</h3>
+          <div class="why-box">
+            <span class="label-mono" data-i18n="sh.why">Por que recomendo</span>
+            Concentração real de EPA+DHA acima de 500mg por cápsula. Certificado IFOS.
+          </div>
+          <a href="#" class="btn btn-accent btn-sm" style="justify-content:center" target="_blank" rel="noopener sponsored">
+            <span data-i18n="sh.buy">Comprar na Amazon</span><span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="product-card tilt" data-cat="book" data-reveal>
+        <div class="product-thumb" style="background:linear-gradient(135deg,#1aa99a,#8fb85a)">
+          <div class="chip tag">Livro</div>
+          <div class="glyph">E</div>
+        </div>
+        <div class="product-body">
+          <div class="label-mono">Alex Hutchinson</div>
+          <h3 style="font-size:15.5px;font-weight:600;line-height:1.3;color:var(--ink)">Endure — Os limites do corpo</h3>
+          <div class="why-box">
+            <span class="label-mono" data-i18n="sh.why">Por que recomendo</span>
+            Leitura essencial para entender performance, fadiga e o papel da mente nos limites fisiológicos.
+          </div>
+          <a href="#" class="btn btn-accent btn-sm" style="justify-content:center" target="_blank" rel="noopener sponsored">
+            <span data-i18n="sh.buy">Comprar na Amazon</span><span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="product-card tilt" data-cat="book" data-reveal>
+        <div class="product-thumb" style="background:linear-gradient(135deg,#1d5e7e,var(--primary))">
+          <div class="chip tag">Livro</div>
+          <div class="glyph">C</div>
+        </div>
+        <div class="product-body">
+          <div class="label-mono">Sophia Alvim</div><!-- A CONFIRMAR: autora/título (veio do design, não verificado) -->
+          <h3 style="font-size:15.5px;font-weight:600;line-height:1.3;color:var(--ink)">Comer com a Cabeça</h3>
+          <div class="why-box">
+            <span class="label-mono" data-i18n="sh.why">Por que recomendo</span>
+            Introdução acessível a alimentação intuitiva e comportamento alimentar para pacientes em tratamento.
+          </div>
+          <a href="#" class="btn btn-accent btn-sm" style="justify-content:center" target="_blank" rel="noopener sponsored">
+            <span data-i18n="sh.buy">Comprar na Amazon</span><span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="product-card tilt" data-cat="tool" data-reveal>
+        <div class="product-thumb" style="background:linear-gradient(135deg,var(--primary-soft),var(--accent-soft))">
+          <div class="chip tag">Utensílio</div>
+          <div class="glyph" style="color:var(--primary)">⚖</div>
+        </div>
+        <div class="product-body">
+          <div class="label-mono">Mondial</div>
+          <h3 style="font-size:15.5px;font-weight:600;line-height:1.3;color:var(--ink)">Balança digital de cozinha 10kg</h3>
+          <div class="why-box">
+            <span class="label-mono" data-i18n="sh.why">Por que recomendo</span>
+            Precisão de 1g, bateria durável. Ferramenta básica para quem está aprendendo porcionamento.
+          </div>
+          <a href="#" class="btn btn-accent btn-sm" style="justify-content:center" target="_blank" rel="noopener sponsored">
+            <span data-i18n="sh.buy">Comprar na Amazon</span><span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="product-card tilt" data-cat="tool" data-reveal>
+        <div class="product-thumb" style="background:linear-gradient(135deg,#6cc0a4,var(--primary))">
+          <div class="chip tag">Utensílio</div>
+          <div class="glyph">◎</div>
+        </div>
+        <div class="product-body">
+          <div class="label-mono">Oster</div>
+          <h3 style="font-size:15.5px;font-weight:600;line-height:1.3;color:var(--ink)">Liquidificador 1400W</h3>
+          <div class="why-box">
+            <span class="label-mono" data-i18n="sh.why">Por que recomendo</span>
+            Potência que realmente tritura folhas e castanhas. Meu favorito para smoothies proteicos.
+          </div>
+          <a href="#" class="btn btn-accent btn-sm" style="justify-content:center" target="_blank" rel="noopener sponsored">
+            <span data-i18n="sh.buy">Comprar na Amazon</span><span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="glass" style="padding:var(--s-7) var(--s-6);display:flex;align-items:center;justify-content:space-between;gap:var(--s-4);flex-wrap:wrap" data-reveal>
+      <div>
+        <h3 class="display display-sm" style="margin-bottom:6px" data-i18n="sh.cta.t">Quer um protocolo personalizado?</h3>
+        <p style="color:var(--ink-3);font-size:14.5px;max-width:50ch" data-i18n="sh.cta.d">Essas recomendações são gerais. Em consulta, eu prescrevo dose e duração com base em exames e sua rotina.</p>
+      </div>
+      <a href="agendamento.html" class="btn btn-primary btn-lg"><span data-i18n="cta.button">Ver horários disponíveis</span><span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="assets/site.js"></script>
+<script src="assets/i18n.js"></script>
+<script src="assets/app.js"></script>
+<script>
+// Links sem endereço de afiliado ficam escondidos até serem preenchidos
+document.querySelectorAll('#products-grid a[href="#"]').forEach(a => a.style.display = 'none');
+
+document.querySelectorAll('[data-pfilter]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-pfilter]').forEach(b => b.classList.remove('chip-primary'));
+    btn.classList.add('chip-primary');
+    const f = btn.dataset.pfilter;
+    document.querySelectorAll('#products-grid > [data-cat]').forEach(c => {
+      c.style.display = (f === 'all' || c.dataset.cat === f) ? '' : 'none';
+    });
+  });
+});
+</script>
+</body>
+</html>

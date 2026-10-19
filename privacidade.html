@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de privacidade · Jessica Oliveira</title>
+<meta name="description" content="Como este site trata seus dados pessoais.">
+<meta name="robots" content="noindex"><!-- REMOVER no lançamento -->
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+  .prose { max-width: 680px; margin: 0 auto; padding: 0 var(--s-5); font-size: 16.5px; line-height: 1.75; }
+  .prose h2 { font-family: var(--ff-display); font-size: 24px; font-weight: 500; margin: var(--s-6) 0 var(--s-3); }
+  .prose p, .prose ul { margin: 0 0 var(--s-4); }
+  .prose a { color: var(--primary); }
+</style>
+</head>
+<body data-page="">
+
+<div id="site-nav"></div>
+
+<section class="section" style="padding-top:var(--s-7)">
+  <div class="prose">
+    <div class="eyebrow mb-3">LGPD</div>
+    <h1 class="display display-md" style="margin-bottom:var(--s-5)">Política de privacidade</h1>
+
+    <p>Este site é de <strong>Jessica Oliveira</strong>, nutricionista (<span data-crn>CRN</span>), responsável pelo tratamento dos dados descritos aqui, conforme a Lei Geral de Proteção de Dados (Lei 13.709/2018).</p>
+
+    <h2>Quais dados coletamos</h2>
+    <p>Na página <a href="agendamento.html">Agendar</a> você informa nome, WhatsApp e, se quiser, e-mail e observações. Esses dados <strong>não ficam guardados no site</strong>: eles são montados numa mensagem que você mesma envia pelo WhatsApp. A partir daí, a conversa segue as regras de privacidade do WhatsApp.</p>
+
+    <h2>Para que usamos</h2>
+    <ul>
+      <li>Responder ao seu pedido de agendamento e confirmar o horário;</li>
+      <li>Entrar em contato sobre a sua consulta.</li>
+    </ul>
+    <p>Não vendemos nem compartilhamos seus dados com terceiros para fins de marketing.</p>
+
+    <h2>Cookies e armazenamento</h2>
+    <p>O site não usa cookies de rastreamento nem publicidade. Guardamos no seu navegador apenas a preferência de idioma (PT/EN). As fontes do site são carregadas do Google Fonts.</p>
+
+    <h2>Links externos</h2>
+    <p>A página de recomendações tem links de afiliado da Amazon. Ao clicar, você passa a seguir a política de privacidade da Amazon.</p>
+
+    <h2>Seus direitos</h2>
+    <p>Você pode pedir acesso, correção ou exclusão dos seus dados a qualquer momento pelo e-mail <a data-email href="#">contato</a> ou pelo WhatsApp.</p>
+
+    <p class="label-mono" style="margin-top:var(--s-6)">Última atualização: outubro de 2026</p>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="assets/site.js"></script>
+<script src="assets/i18n.js"></script>
+<script src="assets/app.js"></script>
+<script>
+document.querySelectorAll('[data-email]').forEach(a => { a.href = 'mailto:' + SITE.email; a.textContent = SITE.email; });
+</script>
+</body>
+</html>

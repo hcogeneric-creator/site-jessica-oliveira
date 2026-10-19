@@ -8,7 +8,7 @@ window.SITE = {
   crn: 'CRN-8 00000',                     // A CONFIRMAR: número real do CRN
   cidade: 'Maringá · PR',
   email: 'oliveiranutri30@gmail.com',
-  instagram: 'jessicaoliveira.nut',        // A CONFIRMAR: só o @, sem "@"
+  instagram: 'jessicaoliveira.nutricionista', // só o @, sem "@"
   whatsapp: '5543996526993',               // 55 + DDD + número, só dígitos
   whatsappLabel: '(43) 99652-6993',        // como aparece escrito
 

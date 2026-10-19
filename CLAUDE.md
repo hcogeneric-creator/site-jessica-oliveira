@@ -36,7 +36,7 @@ Origem: design feito no Claude Design (projeto `5bc2915b-a156-4220-a05a-2cd19c25
 - Ela é nutricionista: textos de saúde devem ser revisados por ela. Nada de prometer resultado. Depoimentos e "antes/depois" seguem o Código de Ética do CFN — confirmar com ela antes de publicar.
 
 ## Pendências (A CONFIRMAR) — buscar "A CONFIRMAR" no código
-- [ ] Número do CRN (Paraná é CRN-8) e Instagram → `site.js` (e-mail e WhatsApp já reais)
+- [ ] Número do CRN (Paraná é CRN-8) → `site.js` (e-mail, WhatsApp e Instagram já reais)
 - [ ] Foto `assets/jessica.jpeg`
 - [ ] Números do topo (+450 pacientes, 7 anos, 96%) → `i18n.js` `hero.stat.*`
 - [ ] Depoimentos reais e autorizados (ou remover)

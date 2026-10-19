@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Ilustração: bateria do músculo sendo recarregada pela creatina">
+  <title>Creatina recarregando a bateria do músculo</title>
+  <style>
+    .float { animation: float 6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .spin { animation: spin 40s linear infinite; transform-box: fill-box; transform-origin: center; }
+    .bar { animation: charge 3.2s ease-in-out infinite; opacity: .15; }
+    .b2 { animation-delay: .35s } .b3 { animation-delay: .7s } .b4 { animation-delay: 1.05s }
+    .atp { animation: rise 4s ease-in infinite; opacity: 0; }
+    .a2 { animation-delay: 1.3s } .a3 { animation-delay: 2.6s }
+    .bolt { animation: pulse 1.6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .spark { animation: twinkle 2.4s ease-in-out infinite; }
+    .s2 { animation-delay: .8s } .s3 { animation-delay: 1.6s }
+    @keyframes float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-12px) } }
+    @keyframes spin { to { transform: rotate(360deg) } }
+    @keyframes charge { 0%,10% { opacity: .15 } 30%,80% { opacity: 1 } 100% { opacity: .15 } }
+    @keyframes rise { 0% { opacity: 0; transform: translateY(0) } 15% { opacity: 1 } 100% { opacity: 0; transform: translateY(-150px) } }
+    @keyframes pulse { 0%,100% { transform: scale(1) } 50% { transform: scale(1.12) } }
+    @keyframes twinkle { 0%,100% { opacity: .2 } 50% { opacity: 1 } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } .bar { opacity: 1 } }
+  </style>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#14897d"/><stop offset=".55" stop-color="#1aa99a"/><stop offset="1" stop-color="#2dc6b4"/>
+    </linearGradient>
+    <radialGradient id="glow" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#fff" stop-opacity=".45"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <circle cx="640" cy="90" r="190" fill="url(#glow)"/>
+  <circle cx="110" cy="440" r="160" fill="#0e2e33" opacity=".12"/>
+
+  <!-- molécula de creatina estilizada -->
+  <g class="spin" opacity=".55">
+    <g transform="translate(130 120)" stroke="#fff" stroke-width="3" fill="none">
+      <line x1="0" y1="0" x2="46" y2="-26"/><line x1="46" y1="-26" x2="92" y2="0"/>
+      <line x1="92" y1="0" x2="92" y2="52"/><line x1="92" y1="0" x2="138" y2="-26"/>
+      <line x1="0" y1="0" x2="-30" y2="40"/>
+    </g>
+    <g transform="translate(130 120)" fill="#fff">
+      <circle r="11"/><circle cx="46" cy="-26" r="9"/><circle cx="92" cy="0" r="11"/>
+      <circle cx="92" cy="52" r="8"/><circle cx="138" cy="-26" r="9"/><circle cx="-30" cy="40" r="8"/>
+    </g>
+  </g>
+
+  <!-- bateria -->
+  <g class="float">
+    <rect x="232" y="170" width="300" height="160" rx="30" fill="#fff" opacity=".96"/>
+    <rect x="532" y="220" width="26" height="60" rx="9" fill="#fff" opacity=".96"/>
+    <rect class="bar b1" x="254" y="192" width="56" height="116" rx="14" fill="#8fb85a"/>
+    <rect class="bar b2" x="320" y="192" width="56" height="116" rx="14" fill="#8fb85a"/>
+    <rect class="bar b3" x="386" y="192" width="56" height="116" rx="14" fill="#8fb85a"/>
+    <rect class="bar b4" x="452" y="192" width="56" height="116" rx="14" fill="#8fb85a"/>
+    <path class="bolt" d="M398 150 L352 262 H392 L374 352 L446 226 H404 L430 150 Z" fill="#0e2e33" stroke="#fff" stroke-width="6" stroke-linejoin="round"/>
+  </g>
+
+  <!-- ATP subindo -->
+  <g font-family="'JetBrains Mono', ui-monospace, monospace" font-size="18" font-weight="700" text-anchor="middle">
+    <g class="atp a1"><circle cx="610" cy="330" r="30" fill="#fff"/><text x="610" y="336" fill="#14897d">ATP</text></g>
+    <g class="atp a2"><circle cx="680" cy="370" r="26" fill="#0e2e33"/><text x="680" y="376" fill="#fff" font-size="15">ATP</text></g>
+    <g class="atp a3"><circle cx="600" cy="400" r="22" fill="#dbebc4"/><text x="600" y="405" fill="#0e2e33" font-size="13">ATP</text></g>
+  </g>
+
+  <!-- faíscas -->
+  <g fill="#fff">
+    <path class="spark s1" d="M690 150 l6 16 16 6 -16 6 -6 16 -6 -16 -16 -6 16 -6z"/>
+    <path class="spark s2" d="M180 330 l4 11 11 4 -11 4 -4 11 -4 -11 -11 -4 11 -4z"/>
+    <path class="spark s3" d="M560 120 l3 9 9 3 -9 3 -3 9 -3 -9 -9 -3 9 -3z"/>
+  </g>
+</svg>

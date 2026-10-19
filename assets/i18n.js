@@ -123,7 +123,7 @@
 
         // ARTIGOS
         'bl.title': 'Artigos',
-        'bl.sub': 'Nutrição, suplementação e comportamento alimentar — escrito por nutricionista, revisado com ciência.',
+        'bl.sub': 'Nutrição e suplementação explicadas de um jeito leve — e com a fonte de cada afirmação a um clique.',
         'bl.filter.all': 'Todos',
         'bl.filter.1': 'Emagrecimento',
         'bl.filter.2': 'Transtornos alimentares',
@@ -292,7 +292,7 @@
         'ab.v.3.d': 'Results that last are the only results worth the visit.',
 
         'bl.title': 'Articles',
-        'bl.sub': 'Nutrition, supplements and eating behavior — written by a dietitian, backed by science.',
+        'bl.sub': 'Nutrition and supplements explained simply — with the source of every claim one click away.',
         'bl.filter.all': 'All',
         'bl.filter.1': 'Weight loss',
         'bl.filter.2': 'Eating disorders',

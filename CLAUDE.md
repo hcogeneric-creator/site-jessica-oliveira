@@ -20,7 +20,8 @@ Origem: design feito no Claude Design (projeto `5bc2915b-a156-4220-a05a-2cd19c25
 | Produtos recomendados | `produtos.html` — cada `.product-card`. Botão só aparece quando `href` não é `#` |
 
 ## Páginas
-- `index.html` início · `sobre.html` · `blog.html` lista de artigos · `artigo-creatina.html`
+- `index.html` início · `sobre.html` · `blog.html` lista de artigos · `artigo-creatina.html` · `artigo-whey-protein.html`
+- Artigos usam também `assets/artigo.css` + `assets/artigo.js` (barra de leitura, contadores `data-count`, gráficos `.chart`, cartões `.flip`, calculadoras `data-calc`). Capas animadas em SVG em `assets/artigos/`
 - `agendamento.html` — 3 passos; no fim abre o WhatsApp da Jessica com o pedido preenchido (nada é guardado no site)
 - `produtos.html` recomendações (afiliado Amazon) · `privacidade.html` LGPD · `404.html`
 
@@ -42,5 +43,5 @@ Origem: design feito no Claude Design (projeto `5bc2915b-a156-4220-a05a-2cd19c25
 - [ ] Depoimentos reais e autorizados (ou remover)
 - [ ] Preços e formas de pagamento
 - [ ] Links de afiliado Amazon nos produtos
-- [ ] Revisar texto do artigo de creatina
+- [ ] Jessica revisar os artigos de creatina e whey (publicados em 19/10/2026; todas as afirmações têm referência com DOI/PubMed conferidos)
 - [ ] Lançamento: remover `<meta name="robots" content="noindex">` de todas as páginas, criar `sitemap.xml`/`robots.txt`, cadastrar no Google Search Console e no Google Meu Negócio

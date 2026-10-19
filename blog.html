@@ -4,10 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Artigos · Jessica Oliveira, Nutricionista</title>
-<meta name="description" content="Artigos sobre nutrição, suplementação e comportamento alimentar.">
+<meta name="description" content="Artigos sobre nutrição e suplementação, com referências científicas para conferir.">
 <meta name="robots" content="noindex"><!-- REMOVER no lançamento -->
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/styles.css">
+<link rel="stylesheet" href="assets/artigo.css">
 </head>
 <body data-page="blog">
 
@@ -18,105 +19,41 @@
     <div style="max-width:720px" data-reveal>
       <div class="eyebrow mb-3" data-i18n="nav.blog">Artigos</div>
       <h1 class="display display-lg" style="margin-bottom:var(--s-4)" data-i18n="bl.title">Artigos</h1>
-      <p style="font-size:18px;color:var(--ink-2);max-width:52ch" data-i18n="bl.sub">Nutrição, suplementação e comportamento alimentar — escrito por nutricionista, revisado com ciência.</p>
-    </div>
-
-    <div class="flex gap-2" style="margin-top:var(--s-6);flex-wrap:wrap" data-reveal>
-      <button class="chip chip-primary" data-filter="all" data-i18n="bl.filter.all">Todos</button>
-      <button class="chip" data-filter="emagrecimento" data-i18n="bl.filter.1">Emagrecimento</button>
-      <button class="chip" data-filter="transtornos" data-i18n="bl.filter.2">Transtornos alimentares</button>
-      <button class="chip" data-filter="suplementacao" data-i18n="bl.filter.3">Suplementação</button>
-      <button class="chip" data-filter="ciencia" data-i18n="bl.filter.4">Ciência nutricional</button>
+      <p style="font-size:18px;color:var(--ink-2);max-width:52ch" data-i18n="bl.sub">Nutrição e suplementação explicadas de um jeito leve — e com a fonte de cada afirmação a um clique.</p>
     </div>
   </div>
 </section>
 
+<!-- LISTA DE ARTIGOS
+     Para publicar um novo: crie artigo-<tema>.html (copie um existente) e adicione um <a class="art-card"> aqui,
+     no topo da lista (o mais recente primeiro). Capa: SVG ou imagem em assets/artigos/. -->
 <section class="section" style="padding-top:0">
-  <div class="container">
+  <div class="container" style="display:grid;gap:var(--s-6)" data-reveal-stagger>
 
-    <!-- Destaque -->
-    <a href="artigo-creatina.html" class="tilt split" style="grid-template-columns:1.2fr 1fr;gap:var(--s-6);background:var(--bg-3);border:1px solid var(--line);border-radius:var(--r-xl);padding:var(--s-5);margin-bottom:var(--s-7);overflow:hidden" data-reveal>
-      <div style="aspect-ratio:5/4;border-radius:var(--r-lg);background:linear-gradient(135deg,var(--primary),var(--primary-2));position:relative;overflow:hidden">
-        <div style="position:absolute;inset:0;background:radial-gradient(circle at 70% 30%,rgba(255,255,255,0.3),transparent 45%)"></div>
-        <div style="position:absolute;top:20px;left:20px" class="chip" data-i18n="ar.1.cat">Suplementação</div>
-        <svg viewBox="0 0 400 400" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.6" aria-hidden="true">
-          <defs><linearGradient id="pill" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#fff" stop-opacity="0.8"/><stop offset="100%" stop-color="#fff" stop-opacity="0.1"/></linearGradient></defs>
-          <rect x="120" y="160" width="160" height="80" rx="40" fill="url(#pill)" transform="rotate(-20 200 200)"/>
-        </svg>
-      </div>
-      <div style="display:flex;flex-direction:column;justify-content:center">
-        <div class="label-mono mb-3" data-i18n="ar.1.date">12 abr · 8 min</div>
-        <h2 class="display display-md" style="margin-bottom:var(--s-4)" data-i18n="ar.1.t">Creatina: o que a ciência diz em 2026</h2>
-        <p style="color:var(--ink-3);font-size:15.5px;max-width:48ch" data-i18n="ar.1.d">Uma revisão honesta sobre dose, momento e para quem realmente vale a pena.</p>
-        <div class="btn btn-ghost mt-5" style="align-self:flex-start"><span data-i18n="bl.read">Ler artigo</span><span class="arrow">→</span></div>
+    <a href="artigo-creatina.html" class="art-card tilt" data-reveal>
+      <div class="cover"><img src="assets/artigos/creatina-capa.svg" alt="Ilustração de bateria sendo recarregada pela creatina"></div>
+      <div>
+        <div class="flex gap-2" style="flex-wrap:wrap;align-items:center">
+          <span class="chip chip-primary">Suplementação</span><span class="label-mono">19 out 2026 · 7 min</span>
+        </div>
+        <h2 class="display display-md" style="margin:var(--s-4) 0 var(--s-3)">Creatina sem mistério: a bateria extra dos seus músculos</h2>
+        <p style="color:var(--ink-3);font-size:15.5px;max-width:48ch">O que ela faz, quanto tomar, quem se beneficia e 6 mitos desmontados — com calculadora de dose e as 5 fontes científicas linkadas.</p>
+        <div class="btn btn-ghost mt-5"><span data-i18n="bl.read">Ler artigo</span><span class="arrow">→</span></div>
       </div>
     </a>
 
-    <!-- Lista. Para publicar um artigo: crie artigo-NOME.html (copie artigo-creatina.html),
-         troque o <div class="card soon"> por <a href="artigo-NOME.html" class="card tilt"> e tire o "Em breve". -->
-    <div class="grid grid-3" data-reveal-stagger id="articles-grid">
-
-      <div class="card soon" data-category="ciencia" data-reveal>
-        <div style="aspect-ratio:4/3;border-radius:var(--r);margin-bottom:var(--s-4);background:linear-gradient(135deg, #c9a876 0%, var(--accent) 100%);position:relative;overflow:hidden">
-          <div style="position:absolute;inset:0;background:radial-gradient(circle at 30% 70%, rgba(255,255,255,0.3), transparent 45%)"></div>
-          <div style="position:absolute;top:16px;left:16px" class="chip" data-i18n="ar.2.cat">Ciência Nutricional</div>
-          <span class="soon-tag" data-i18n="ar.soon">Em breve</span>
+    <a href="artigo-whey-protein.html" class="art-card tilt" data-reveal>
+      <div class="cover"><img src="assets/artigos/whey-capa.svg" alt="Ilustração de coqueteleira de whey construindo blocos de músculo"></div>
+      <div>
+        <div class="flex gap-2" style="flex-wrap:wrap;align-items:center">
+          <span class="chip chip-primary">Suplementação</span><span class="label-mono">19 out 2026 · 8 min</span>
         </div>
-        <h3 style="font-family:var(--ff-display);font-size:22px;font-weight:400;margin-bottom:8px" data-i18n="ar.2.t">Proteína animal vs. vegetal: a matemática real</h3>
-        <p style="color:var(--ink-3);font-size:14px" data-i18n="ar.2.d">Leucina, digestibilidade e DIAAS explicados sem tribalismo.</p>
+        <h2 class="display display-md" style="margin:var(--s-4) 0 var(--s-3)">Whey protein: os tijolinhos que constroem músculo</h2>
+        <p style="color:var(--ink-3);font-size:15.5px;max-width:48ch">Quanta proteína você precisa por dia, por que o whey é tão eficiente e quando ele faz sentido — com calculadora e 6 fontes linkadas.</p>
+        <div class="btn btn-ghost mt-5"><span data-i18n="bl.read">Ler artigo</span><span class="arrow">→</span></div>
       </div>
+    </a>
 
-      <div class="card soon" data-category="transtornos" data-reveal>
-        <div style="aspect-ratio:4/3;border-radius:var(--r);margin-bottom:var(--s-4);background:linear-gradient(135deg, var(--ink) 0%, #3d4a42 100%);position:relative;overflow:hidden">
-          <div style="position:absolute;inset:0;background:radial-gradient(circle at 80% 20%, rgba(26,169,154,0.35), transparent 50%)"></div>
-          <div style="position:absolute;top:16px;left:16px" class="chip" data-i18n="ar.3.cat">Transtornos</div>
-          <span class="soon-tag" data-i18n="ar.soon">Em breve</span>
-        </div>
-        <h3 style="font-family:var(--ff-display);font-size:22px;font-weight:400;margin-bottom:8px" data-i18n="ar.3.t">Compulsão alimentar: por que contar calorias piora</h3>
-        <p style="color:var(--ink-3);font-size:14px" data-i18n="ar.3.d">Um olhar clínico sobre gatilhos, restrição cognitiva e alimentação intuitiva.</p>
-      </div>
-
-      <div class="card soon" data-category="emagrecimento" data-reveal>
-        <div style="aspect-ratio:4/3;border-radius:var(--r);margin-bottom:var(--s-4);background:linear-gradient(135deg, var(--primary-soft), var(--accent-soft));position:relative;overflow:hidden">
-          <div style="position:absolute;inset:0;background:radial-gradient(circle at 60% 40%, rgba(255,255,255,0.5), transparent 50%)"></div>
-          <div style="position:absolute;top:16px;left:16px" class="chip" data-i18n="bl.filter.1">Emagrecimento</div>
-          <span class="soon-tag" data-i18n="ar.soon">Em breve</span>
-        </div>
-        <h3 style="font-family:var(--ff-display);font-size:22px;font-weight:400;margin-bottom:8px">Déficit calórico não é fome: como ajustar densidade</h3>
-        <p style="color:var(--ink-3);font-size:14px">Volume, fibra e proteína — três alavancas que transformam qualquer plano.</p>
-      </div>
-
-      <div class="card soon" data-category="suplementacao" data-reveal>
-        <div style="aspect-ratio:4/3;border-radius:var(--r);margin-bottom:var(--s-4);background:linear-gradient(135deg, #5a8a5c, #2f5d50);position:relative;overflow:hidden">
-          <div style="position:absolute;inset:0;background:radial-gradient(circle at 20% 30%, rgba(255,255,255,0.25), transparent 45%)"></div>
-          <div style="position:absolute;top:16px;left:16px" class="chip" data-i18n="ar.1.cat">Suplementação</div>
-          <span class="soon-tag" data-i18n="ar.soon">Em breve</span>
-        </div>
-        <h3 style="font-family:var(--ff-display);font-size:22px;font-weight:400;margin-bottom:8px">Vitamina D: a dose certa é a que você precisa</h3>
-        <p style="color:var(--ink-3);font-size:14px">Individualização a partir de 25-OH-D, peso e exposição solar real.</p>
-      </div>
-
-      <div class="card soon" data-category="ciencia" data-reveal>
-        <div style="aspect-ratio:4/3;border-radius:var(--r);margin-bottom:var(--s-4);background:linear-gradient(135deg, #2dc6b4, #1d5e7e);position:relative;overflow:hidden">
-          <div style="position:absolute;inset:0;background:radial-gradient(circle at 70% 50%, rgba(255,255,255,0.25), transparent 45%)"></div>
-          <div style="position:absolute;top:16px;left:16px" class="chip" data-i18n="ar.2.cat">Ciência Nutricional</div>
-          <span class="soon-tag" data-i18n="ar.soon">Em breve</span>
-        </div>
-        <h3 style="font-family:var(--ff-display);font-size:22px;font-weight:400;margin-bottom:8px">Jejum intermitente: o que sobrou depois da hype</h3>
-        <p style="color:var(--ink-3);font-size:14px">Metanálises recentes vs. marketing — quando faz sentido e quando não.</p>
-      </div>
-
-      <div class="card soon" data-category="transtornos" data-reveal>
-        <div style="aspect-ratio:4/3;border-radius:var(--r);margin-bottom:var(--s-4);background:linear-gradient(135deg, var(--ink), #1d5e7e);position:relative;overflow:hidden">
-          <div style="position:absolute;inset:0;background:radial-gradient(circle at 30% 60%, rgba(255,255,255,0.2), transparent 50%)"></div>
-          <div style="position:absolute;top:16px;left:16px" class="chip" data-i18n="ar.3.cat">Transtornos</div>
-          <span class="soon-tag" data-i18n="ar.soon">Em breve</span>
-        </div>
-        <h3 style="font-family:var(--ff-display);font-size:22px;font-weight:400;margin-bottom:8px">Ortorexia: quando "comer limpo" vira doença</h3>
-        <p style="color:var(--ink-3);font-size:14px">Sinais clínicos, diagnóstico diferencial e o papel da nutrição comportamental.</p>
-      </div>
-
-    </div>
   </div>
 </section>
 
@@ -125,17 +62,5 @@
 <script src="assets/site.js"></script>
 <script src="assets/i18n.js"></script>
 <script src="assets/app.js"></script>
-<script>
-document.querySelectorAll('[data-filter]').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('chip-primary'));
-    btn.classList.add('chip-primary');
-    const f = btn.dataset.filter;
-    document.querySelectorAll('#articles-grid > [data-category]').forEach(card => {
-      card.style.display = (f === 'all' || card.dataset.category === f) ? '' : 'none';
-    });
-  });
-});
-</script>
 </body>
 </html>

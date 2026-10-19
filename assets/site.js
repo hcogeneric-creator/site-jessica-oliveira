@@ -7,10 +7,10 @@ window.SITE = {
   nome: 'Jessica Oliveira',
   crn: 'CRN-8 00000',                     // A CONFIRMAR: número real do CRN
   cidade: 'Maringá · PR',
-  email: 'contato@jessicaoliveiranutri.com.br', // A CONFIRMAR
+  email: 'oliveiranutri30@gmail.com',
   instagram: 'jessicaoliveira.nut',        // A CONFIRMAR: só o @, sem "@"
-  whatsapp: '5544999999999',               // A CONFIRMAR: 55 + DDD + número, só dígitos
-  whatsappLabel: '(44) 99999-9999',        // A CONFIRMAR: como aparece escrito
+  whatsapp: '5543996526993',               // 55 + DDD + número, só dígitos
+  whatsappLabel: '(43) 99652-6993',        // como aparece escrito
 
   // Preços da página Agendar (em reais)
   servicos: {

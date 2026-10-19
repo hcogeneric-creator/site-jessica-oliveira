@@ -37,7 +37,7 @@ Origem: design feito no Claude Design (projeto `5bc2915b-a156-4220-a05a-2cd19c25
 
 ## Pendências (A CONFIRMAR) — buscar "A CONFIRMAR" no código
 - [ ] Número do CRN (Paraná é CRN-8) → `site.js` (e-mail, WhatsApp e Instagram já reais)
-- [ ] Foto `assets/jessica.jpeg`
+- [x] Foto: original `jessica.jpeg` (sobre), recortes `jessica-quadrada.jpg` (início) e `jessica-rosto.jpg` (menu/avatares)
 - [ ] Números do topo (+450 pacientes, 7 anos, 96%) → `i18n.js` `hero.stat.*`
 - [ ] Depoimentos reais e autorizados (ou remover)
 - [ ] Preços e formas de pagamento

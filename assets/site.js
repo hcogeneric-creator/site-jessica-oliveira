@@ -47,7 +47,7 @@ window.SITE = {
 
   const brand = `
     <a href="index.html" class="brand">
-      <span class="brand-mark">J<img src="assets/jessica.jpeg" alt="" onerror="this.remove()"></span>
+      <span class="brand-mark">J<img src="assets/jessica-rosto.jpg" alt="" onerror="this.remove()"></span>
       <span class="brand-meta">
         <span>${S.nome}</span>
         <small><span data-i18n="meta.prof">Nutricionista</span> · ${S.cidade}</small>
@@ -95,7 +95,7 @@ window.SITE = {
         <div class="footer-cols">
           <div>
             <div class="brand" style="margin-bottom:var(--s-3)">
-              <span class="brand-mark">J<img src="assets/jessica.jpeg" alt="" onerror="this.remove()"></span>
+              <span class="brand-mark">J<img src="assets/jessica-rosto.jpg" alt="" onerror="this.remove()"></span>
               <span class="brand-meta">
                 <span>${S.nome}</span>
                 <small><span data-i18n="meta.prof">Nutricionista</span> · ${S.crn}</small>

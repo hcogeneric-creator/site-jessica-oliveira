@@ -18,8 +18,8 @@
 
 <!-- TOPO -->
 <section class="section" style="padding-top: var(--s-7); padding-bottom: var(--s-8); position: relative; overflow: hidden;">
-  <div aria-hidden="true" style="position:absolute;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,color-mix(in oklab, var(--primary-soft) 80%, transparent),transparent 70%);filter:blur(40px);pointer-events:none"></div>
-  <div aria-hidden="true" style="position:absolute;bottom:-300px;left:-200px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,color-mix(in oklab, var(--accent-soft) 60%, transparent),transparent 70%);filter:blur(40px);pointer-events:none"></div>
+  <div class="blob" aria-hidden="true" style="position:absolute;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,color-mix(in oklab, var(--primary-soft) 80%, transparent),transparent 70%);filter:blur(40px);pointer-events:none"></div>
+  <div class="blob b2" aria-hidden="true" style="position:absolute;bottom:-300px;left:-200px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,color-mix(in oklab, var(--accent-soft) 60%, transparent),transparent 70%);filter:blur(40px);pointer-events:none"></div>
 
   <div class="container" style="position:relative">
     <div class="split" style="grid-template-columns:1.1fr 1fr">
@@ -28,7 +28,7 @@
           <span class="chip-dot"></span>
           <span data-i18n="hero.status">Agenda aberta</span>
         </div>
-        <h1 class="display display-xl" style="margin-bottom:var(--s-5)">
+        <h1 class="display display-xl hero-title" style="margin-bottom:var(--s-5)">
           <span data-i18n="hero.title.a">Nutrição</span>
           <span style="font-style:italic;color:var(--primary)" data-i18n="hero.title.b">com método,</span><br>
           <span data-i18n="hero.title.c">sem dieta.</span>
@@ -49,15 +49,15 @@
         <!-- Números (A CONFIRMAR) -->
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s-4);margin-top:var(--s-7);padding-top:var(--s-5);border-top:1px solid var(--line)">
           <div>
-            <div class="num-mono display display-sm" data-i18n="hero.stat.1.v">+450</div>
+            <div class="num-mono display display-sm" data-countup data-i18n="hero.stat.1.v">+450</div>
             <div class="eyebrow mt-2" data-i18n="hero.stat.1.l">Pacientes atendidos</div>
           </div>
           <div>
-            <div class="num-mono display display-sm" data-i18n="hero.stat.2.v">7 anos</div>
+            <div class="num-mono display display-sm" data-countup data-i18n="hero.stat.2.v">7 anos</div>
             <div class="eyebrow mt-2" data-i18n="hero.stat.2.l">De clínica</div>
           </div>
           <div>
-            <div class="num-mono display display-sm" data-i18n="hero.stat.3.v">96%</div>
+            <div class="num-mono display display-sm" data-countup data-i18n="hero.stat.3.v">96%</div>
             <div class="eyebrow mt-2" data-i18n="hero.stat.3.l">Retenção no 3º mês</div>
           </div>
         </div>
@@ -79,6 +79,14 @@
     </div>
   </div>
 </section>
+
+<!-- FAIXA ROLANDO (itens duplicados para o loop ficar contínuo) -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Emagrecimento sustentável</span><i>✦</i><span>Suplementação personalizada</span><i>✦</i><span>Transtornos alimentares</span><i>✦</i><span>Nutrição esportiva</span><i>✦</i><span>Online e presencial em Maringá</span><i>✦</i>
+    <span>Emagrecimento sustentável</span><i>✦</i><span>Suplementação personalizada</span><i>✦</i><span>Transtornos alimentares</span><i>✦</i><span>Nutrição esportiva</span><i>✦</i><span>Online e presencial em Maringá</span><i>✦</i>
+  </div>
+</div>
 
 <!-- O QUE OFERECEMOS -->
 <section class="section">

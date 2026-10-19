@@ -14,7 +14,6 @@
     @keyframes travel { 0% { offset-distance: 0%; opacity: 0 } 10% { opacity: 1 } 90% { opacity: 1 } 100% { offset-distance: 100%; opacity: 0 } }
     @keyframes build { 0%,15% { transform: scaleY(.25); opacity: .35 } 45%,85% { transform: scaleY(1); opacity: 1 } 100% { transform: scaleY(.25); opacity: .35 } }
     @keyframes twinkle { 0%,100% { opacity: .2 } 50% { opacity: 1 } }
-    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } .bead { offset-distance: 50% } }
   </style>
   <defs>
     <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">

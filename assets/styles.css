@@ -452,10 +452,41 @@ p { margin: 0; }
   .orb-stage { max-width: 360px !important; margin: 0 auto !important; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .orb-core, .orb-ring, .orb-satellite, .chip-dot { animation: none !important; }
-  [data-reveal] { transition: none !important; }
-}
+/* O site anima mesmo quando o Windows está com "efeitos de animação" desligados
+   (escolha do usuário em 19/10/2026). Só o parallax de rolagem é desligado nesse caso (app.js). */
+
+/* --------------------------- MOVIMENTO EXTRA --------------------------- */
+/* Título do topo: palavras sobem em sequência */
+.hero-title > span { display: inline-block; animation: word-rise 1s var(--ease) both; }
+.hero-title > span:nth-child(1) { animation-delay: .15s; }
+.hero-title > span:nth-child(2) { animation-delay: .35s; }
+.hero-title > span:nth-child(4) { animation-delay: .55s; }
+@keyframes word-rise { from { opacity: 0; transform: translateY(40px) rotate(2deg); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
+
+/* Faixa de especialidades rolando */
+.marquee { overflow: hidden; border-block: 1px solid var(--line); background: var(--bg-3); padding: 18px 0; -webkit-mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.marquee-track { display: flex; width: max-content; gap: 40px; align-items: center; animation: marquee 38s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee-track span { font-family: var(--ff-display); font-size: clamp(22px, 3vw, 34px); font-style: italic; color: var(--ink); white-space: nowrap; }
+.marquee-track i { font-style: normal; color: var(--primary); font-size: 20px; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* Bolhas do fundo seguem o mouse (app.js define --mx/--my) */
+.blob { transition: translate 1.2s var(--ease); translate: calc(var(--mx, 0) * 40px) calc(var(--my, 0) * 40px); }
+.blob.b2 { translate: calc(var(--mx, 0) * -60px) calc(var(--my, 0) * -60px); }
+
+/* Satélites também giram ao redor da órbita */
+.orb-ring::after { content: ""; position: absolute; top: -5px; left: 50%; width: 10px; height: 10px; border-radius: 50%; background: var(--primary); box-shadow: 0 0 16px var(--primary); }
+.orb-ring-2::after { background: var(--accent); box-shadow: 0 0 16px var(--accent); top: auto; bottom: -5px; }
+
+/* Botões com brilho passando */
+.btn-primary::after, .btn-accent::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(110deg, transparent 35%, rgba(255,255,255,.28) 50%, transparent 65%); background-size: 250% 100%; background-position: 120% 0; pointer-events: none; }
+.btn-primary:hover::after, .btn-accent:hover::after { animation: shine .9s var(--ease); }
+@keyframes shine { to { background-position: -120% 0; } }
+
+/* Ícones dos cards pulam no hover */
+.card .flex-center svg { transition: transform .4s cubic-bezier(.3,1.6,.5,1); }
+.card:hover .flex-center svg { transform: scale(1.18) rotate(-6deg); }
 
 /* --------------------------- FORMULÁRIO --------------------------- */
 .field { display: flex; flex-direction: column; gap: 6px; }

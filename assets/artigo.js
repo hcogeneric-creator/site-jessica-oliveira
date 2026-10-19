@@ -1,6 +1,6 @@
 /* Efeitos dos artigos: progresso de leitura, contadores, gráficos, cartões e calculadoras */
 (function () {
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reduce = false; // anima sempre (escolha do usuário em 19/10/2026)
   const fmt = (v, d) => v.toLocaleString('pt-BR', { minimumFractionDigits: d, maximumFractionDigits: d });
 
   // Barra de progresso

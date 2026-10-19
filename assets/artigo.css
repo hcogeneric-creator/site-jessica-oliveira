@@ -128,8 +128,3 @@
 .art-card .cover img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
 .art-card:hover .cover img { transform: scale(1.04); }
 @media (max-width: 860px) { .art-card { grid-template-columns: 1fr; gap: var(--s-4); } }
-
-@media (prefers-reduced-motion: reduce) {
-  .bar-fill, .curve path.line, .flip-inner { transition: none !important; }
-  .chart .lane .fill { animation: none !important; width: 100%; }
-}
